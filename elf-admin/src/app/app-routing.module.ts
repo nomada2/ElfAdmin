@@ -3,9 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { MsalGuard } from '@azure/msal-angular';
 
 import { HomeComponent } from './home/home.component';
+import { LinksComponent } from './links/links.component';
 import { ReportComponent } from './report/report.component';
 
 const routes: Routes = [
+  {
+    path: 'links',
+    component: LinksComponent,
+    canActivate: [
+      MsalGuard
+    ]
+  },
   {
     path: 'report',
     component: ReportComponent,
