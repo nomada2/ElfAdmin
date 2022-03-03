@@ -11,8 +11,13 @@ export class LinkService {
     constructor(private http: HttpClient) { }
 
     list(take: number, offset: number, term: string) {
-        return this.http.get<Link[]>(this.url + `/list?take=${take}&offset=${offset}` + (term ? `&term=${term}` : ''))
+        return this.http.get<PagedLinkResult>(this.url + `/list?take=${take}&offset=${offset}` + (term ? `&term=${term}` : ''))
     }
+}
+
+export interface PagedLinkResult {
+    links: Link[];
+    totalRows: number;
 }
 
 export interface Link {
