@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatDividerModule } from '@angular/material/divider';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
@@ -78,6 +79,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatSortModule,
     MatPaginatorModule,
     MatProgressBarModule,
+    MatDividerModule,
     FormsModule,
   ],
   providers: [

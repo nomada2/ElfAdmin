@@ -1,3 +1,17 @@
+<button mat-flat-button color="primary" matTooltip="New link" class="me-2">
+    <mat-icon class="material-icons">add</mat-icon>
+</button>
+<button mat-stroked-button color="primary" class="me-2">
+    <mat-icon class="material-icons">refresh</mat-icon>
+</button>
+
+<mat-form-field class="search-field" appearance="standard">
+    <mat-label>Search</mat-label>
+    <input matInput type="search" placeholder="Term" value="">
+</mat-form-field>
+
+<mat-divider></mat-divider>
+
 <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
 <table mat-table [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="fwToken">
