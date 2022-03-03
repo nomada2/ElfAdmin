@@ -12,7 +12,7 @@ export class LinksComponent implements OnInit {
 
     isLoading = false;
     totalRows = 0;
-    pageSize = 15;
+    pageSize = 10;
     currentPage = 0;
     pageSizeOptions: number[] = [5, 10, 15, 20, 50, 100];
 

@@ -17,6 +17,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
@@ -82,6 +83,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatProgressBarModule,
     MatDividerModule,
     MatDialogModule,
+    MatChipsModule,
     FormsModule,
   ],
   providers: [
