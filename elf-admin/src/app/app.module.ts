@@ -12,6 +12,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatIconModule } from '@angular/material/icon'
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field'
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
@@ -33,7 +35,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
-  
+
   protectedResourceMap.set(protectedResources.linkApi.endpoint, protectedResources.linkApi.scopes);
   protectedResourceMap.set(protectedResources.reportApi.endpoint, protectedResources.reportApi.scopes);
 
@@ -72,6 +74,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatInputModule,
     MatIconModule,
     MatFormFieldModule,
+    MatSortModule,
+    MatPaginatorModule,
     FormsModule,
   ],
   providers: [

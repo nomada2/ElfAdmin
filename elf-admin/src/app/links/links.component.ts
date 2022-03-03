@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Link, LinkService } from './link.service';
-
+import { MatSort, Sort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 @Component({
     selector: 'app-links',
     templateUrl: './links.component.html',
@@ -8,11 +9,12 @@ import { Link, LinkService } from './link.service';
 })
 export class LinksComponent implements OnInit {
 
-    links: Link[] = [];
-
-    displayedColumns = ['fwToken', 'originUrl', 'note', 'akaName', 'isEnabled', 'ttl', 'updateTimeUtc', 'delete'];
+    displayedColumns: string[] = ['fwToken', 'originUrl', 'note', 'akaName', 'isEnabled', 'ttl', 'updateTimeUtc', 'action', 'manage'];
+    dataSource: any;
 
     constructor(private service: LinkService) { }
+
+    @ViewChild(MatSort) sort: MatSort;
 
     ngOnInit(): void {
         this.getLinks();
@@ -21,7 +23,8 @@ export class LinksComponent implements OnInit {
     getLinks(): void {
         this.service.list(20, 0, 'az')
             .subscribe((links: Link[]) => {
-                this.links = links;
+                this.dataSource = new MatTableDataSource(links);
+                this.dataSource.sort = this.sort;
             });
     }
 
