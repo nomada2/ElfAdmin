@@ -28,7 +28,12 @@ export class LinksComponent implements OnInit {
         this.getLinks();
     }
 
-    getLinks(): void {
+    getLinks(reset: boolean = false): void {
+        if (reset) {
+            this.totalRows = 0;
+            this.currentPage = 0;
+        }
+
         this.isLoading = true;
 
         this.service.list(this.pageSize, this.currentPage * this.pageSize, '')
