@@ -9,8 +9,14 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class LinksComponent implements OnInit {
 
+    isLoading = false;
+    totalRows = 0;
+    pageSize = 5;
+    currentPage = 0;
+    pageSizeOptions: number[] = [5, 10, 25, 100];
+
     displayedColumns: string[] = ['fwToken', 'originUrl', 'note', 'akaName', 'isEnabled', 'ttl', 'updateTimeUtc', 'action', 'manage'];
-    dataSource: any;
+    dataSource: MatTableDataSource<Link> = new MatTableDataSource();;
 
     constructor(private service: LinkService) { }
 
@@ -21,8 +27,12 @@ export class LinksComponent implements OnInit {
     }
 
     getLinks(): void {
+        this.isLoading = true;
+
         this.service.list(20, 0, 'az')
             .subscribe((links: Link[]) => {
+                this.isLoading = false;
+                
                 this.dataSource = new MatTableDataSource(links);
                 this.dataSource.sort = this.sort;
             });
