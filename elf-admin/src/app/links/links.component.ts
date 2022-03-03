@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Link, LinkService } from './link.service';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 @Component({
     selector: 'app-links',
     templateUrl: './links.component.html',
@@ -11,7 +12,7 @@ export class LinksComponent implements OnInit {
 
     isLoading = false;
     totalRows = 0;
-    pageSize = 5;
+    pageSize = 10;
     currentPage = 0;
     pageSizeOptions: number[] = [5, 10, 25, 100];
 
@@ -21,6 +22,7 @@ export class LinksComponent implements OnInit {
     constructor(private service: LinkService) { }
 
     @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatPaginator) paginator!: MatPaginator;
 
     ngOnInit(): void {
         this.getLinks();
@@ -32,9 +34,16 @@ export class LinksComponent implements OnInit {
         this.service.list(20, 0, 'az')
             .subscribe((links: Link[]) => {
                 this.isLoading = false;
-                
+
                 this.dataSource = new MatTableDataSource(links);
+
                 this.dataSource.sort = this.sort;
+                this.dataSource.paginator = this.paginator;
+
+                setTimeout(() => {
+                    this.paginator.pageIndex = this.currentPage;
+                    this.paginator.length = 128; // TODO
+                });
             });
     }
 
@@ -44,5 +53,12 @@ export class LinksComponent implements OnInit {
 
     deleteLink(id: number): void {
         // TODO
+    }
+
+    pageChanged(event: PageEvent) {
+        console.log({ event });
+        this.pageSize = event.pageSize;
+        this.currentPage = event.pageIndex;
+        this.getLinks();
     }
 }
