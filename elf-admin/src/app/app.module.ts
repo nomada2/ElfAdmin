@@ -20,6 +20,7 @@ import { msalConfig, loginRequest, protectedResources } from './auth-config';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
 import { LinkService } from './links/link.service';
+import { LinksComponent } from './links/links.component';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication(msalConfig);
@@ -49,7 +50,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    LinksComponent
   ],
   imports: [
     BrowserModule,

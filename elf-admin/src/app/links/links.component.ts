@@ -10,7 +10,7 @@ export class LinksComponent implements OnInit {
 
     links: Link[] = [];
 
-    displayedColumns = ['token', 'originUrl', 'note', 'aka', 'enabled', 'ttl', 'updateTimeUtc'];
+    displayedColumns = ['fwToken', 'originUrl', 'note', 'akaName', 'isEnabled', 'ttl', 'updateTimeUtc'];
 
     constructor(private service: LinkService) { }
 
@@ -19,7 +19,7 @@ export class LinksComponent implements OnInit {
     }
 
     getLinks(): void {
-        this.service.list('', 20, 0)
+        this.service.list(20, 0, 'az')
             .subscribe((links: Link[]) => {
                 this.links = links;
             });

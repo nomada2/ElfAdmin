@@ -10,13 +10,19 @@ export class LinkService {
 
     constructor(private http: HttpClient) { }
 
-    list(term: string, take: number, offset: number) {
-        return this.http.get<Link[]>(this.url + `/list?take=${take}&offset=${offset}`)
+    list(take: number, offset: number, term: string) {
+        return this.http.get<Link[]>(this.url + `/list?take=${take}&offset=${offset}` + (term ? `&term=${term}` : ''))
     }
 }
 
 export interface Link {
+    akaName: string;
+    fwToken: string;
     id: number;
-    tenantId: string;
+    isEnabled: boolean;
+    note: string;
     originUrl: string;
+    tenantId: string;
+    ttl: number;
+    updateTimeUtc: Date;
 }
