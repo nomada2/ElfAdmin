@@ -1,16 +1,18 @@
-<mat-toolbar color="primary">
-    <a class="title" href="/">Elf Admin</a>
+<nav class="elf-navbar mat-elevation-z6">
+    <div class="elf-navbar-header">
+        <a mat-button [routerLink]="['/']">Elf Admin</a>
 
-    <a mat-button [routerLink]="['links']">Manage Links</a>
-    <a mat-button [routerLink]="['report']">Report</a>
+        <a mat-button [routerLink]="['links']">Manage Links</a>
+        <a mat-button [routerLink]="['report']">Report</a>
 
-    <div class="toolbar-spacer"></div>
+        <div class="flex-spacer"></div>
 
-    <div *ngIf="loginDisplay">{{ accountInfo.name }} ({{ accountInfo.username }})</div>
+        <div class="user-info me-3" *ngIf="loginDisplay">{{ accountInfo.name }} ({{ accountInfo.username }})</div>
 
-    <button mat-flat-button *ngIf="!loginDisplay" (click)="login()">Login</button>
-    <button mat-flat-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
-</mat-toolbar>
-<div class="container-fluid mt-4">
+        <button mat-flat-button *ngIf="!loginDisplay" (click)="login()">Login</button>
+        <button mat-flat-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
+    </div>
+</nav>
+<div class="container-fluid">
     <router-outlet *ngIf="!isIframe"></router-outlet>
 </div>

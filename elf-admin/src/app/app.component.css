@@ -2,10 +2,37 @@ a {
   text-decoration: none;
 }
 
-.toolbar-spacer {
-  flex: 1 1 auto;
-}
-
 a.title {
   color: white;
+}
+
+.elf-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  background: #3f51b5;
+  color: #fff;
+}
+
+.elf-navbar-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 8px 16px;
+}
+
+.flex-spacer {
+  flex-grow: 1;
+}
+
+.elf-navbar .elf-navbar-header a:hover,
+.elf-navbar .elf-navbar-header a:focus {
+  background: rgba(0, 0, 0, .4);
+  color: #FFF;
+}
+
+.user-info {
+  font-size: 14px;
 }
