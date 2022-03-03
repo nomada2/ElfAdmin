@@ -12,9 +12,9 @@ export class LinksComponent implements OnInit {
 
     isLoading = false;
     totalRows = 0;
-    pageSize = 10;
+    pageSize = 15;
     currentPage = 0;
-    pageSizeOptions: number[] = [5, 10, 25, 100];
+    pageSizeOptions: number[] = [5, 10, 15, 20, 50, 100];
 
     displayedColumns: string[] = ['fwToken', 'originUrl', 'note', 'akaName', 'isEnabled', 'ttl', 'updateTimeUtc', 'action', 'manage'];
     dataSource: MatTableDataSource<Link> = new MatTableDataSource();;
@@ -31,7 +31,7 @@ export class LinksComponent implements OnInit {
     getLinks(): void {
         this.isLoading = true;
 
-        this.service.list(20, 0, 'az')
+        this.service.list(this.pageSize, this.currentPage * this.pageSize, '')
             .subscribe((links: Link[]) => {
                 this.isLoading = false;
 
