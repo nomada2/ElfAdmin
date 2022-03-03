@@ -1,1 +1,13 @@
-Hello
+<mat-toolbar color="primary">
+    <a class="title" href="/">Elf Admin</a>
+
+    <div class="toolbar-spacer"></div>
+
+    <a mat-button [routerLink]="['report-view']">Report</a>
+
+    <button mat-flat-button *ngIf="!loginDisplay" (click)="login()">Login</button>
+    <button mat-flat-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
+</mat-toolbar>
+<div class="container">
+    <router-outlet *ngIf="!isIframe"></router-outlet>
+</div>
