@@ -1,10 +1,12 @@
 <mat-toolbar color="primary">
     <a class="title" href="/">Elf Admin</a>
 
-    <div class="toolbar-spacer"></div>
-
     <a mat-button [routerLink]="['links']">Manage Links</a>
     <a mat-button [routerLink]="['report']">Report</a>
+
+    <div class="toolbar-spacer"></div>
+
+    <div *ngIf="loginDisplay">{{ accountInfo.name }} ({{ accountInfo.username }})</div>
 
     <button mat-flat-button *ngIf="!loginDisplay" (click)="login()">Login</button>
     <button mat-flat-button *ngIf="loginDisplay" (click)="logout()">Logout</button>

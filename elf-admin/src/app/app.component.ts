@@ -1,6 +1,6 @@
 import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { MsalBroadcastService, MsalGuardConfiguration, MsalService, MSAL_GUARD_CONFIG } from '@azure/msal-angular';
-import { AuthenticationResult, InteractionStatus, InteractionType, PopupRequest, RedirectRequest } from '@azure/msal-browser';
+import { AccountInfo, AuthenticationResult, InteractionStatus, InteractionType, PopupRequest, RedirectRequest } from '@azure/msal-browser';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
 
@@ -13,6 +13,8 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'elf-admin';
   isIframe = false;
   loginDisplay = false;
+  accountInfo: AccountInfo;
+
   private readonly _destroying$ = new Subject<void>();
 
   constructor(
@@ -36,6 +38,9 @@ export class AppComponent implements OnInit, OnDestroy {
 
   setLoginDisplay() {
     this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
+    if (this.loginDisplay) {
+      this.accountInfo = this.authService.instance.getAllAccounts()[0];
+    }
   }
 
   login() {
