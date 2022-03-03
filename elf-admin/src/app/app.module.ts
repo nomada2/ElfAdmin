@@ -19,6 +19,7 @@ import { MsalGuard, MsalInterceptor, MsalBroadcastService, MsalInterceptorConfig
 import { msalConfig, loginRequest, protectedResources } from './auth-config';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './home/home.component';
+import { LinkService } from './links/link.service';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication(msalConfig);
@@ -26,7 +27,8 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 
 export function MSALInterceptorConfigFactory(): MsalInterceptorConfiguration {
   const protectedResourceMap = new Map<string, Array<string>>();
-
+  
+  protectedResourceMap.set(protectedResources.linkApi.endpoint, protectedResources.linkApi.scopes);
   protectedResourceMap.set(protectedResources.reportApi.endpoint, protectedResources.reportApi.scopes);
 
   return {
@@ -53,6 +55,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
+    MsalModule,
     MatButtonModule,
     MatToolbarModule,
     MatCardModule,
@@ -78,7 +82,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     },
     MsalService,
     MsalGuard,
-    MsalBroadcastService
+    MsalBroadcastService,
+    LinkService
   ],
   bootstrap: [AppComponent, MsalRedirectComponent]
 })

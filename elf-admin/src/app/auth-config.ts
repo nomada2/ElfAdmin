@@ -22,10 +22,14 @@ export const msalConfig: Configuration = {
 }
 
 export const protectedResources = {
+    linkApi: {
+        endpoint: "https://localhost:7096/api/link",
+        scopes: ["api://a439e578-3ff8-4bee-91e5-96141234bc67/access_as_user"],
+    },
     reportApi: {
         endpoint: "https://localhost:7096/api/report",
         scopes: ["api://a439e578-3ff8-4bee-91e5-96141234bc67/access_as_user"],
-    },
+    }
 }
 
 export const loginRequest = {

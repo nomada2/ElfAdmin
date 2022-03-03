@@ -13,7 +13,6 @@ import { EventMessage, EventType, AuthenticationResult, InteractionStatus } from
 export class HomeComponent implements OnInit {
     loginDisplay = false;
     displayedColumns: string[] = ['claim', 'value'];
-    dataSource: any = [];
     private readonly _destroying$ = new Subject<void>();
 
     constructor(private authService: MsalService, private msalBroadcastService: MsalBroadcastService) { }
@@ -37,7 +36,6 @@ export class HomeComponent implements OnInit {
             .subscribe(() => {
                 this.setLoginDisplay();
                 this.checkAndSetActiveAccount();
-                this.getClaims(this.authService.instance.getActiveAccount()?.idTokenClaims)
             });
     }
 
@@ -49,17 +47,9 @@ export class HomeComponent implements OnInit {
             this.authService.instance.setActiveAccount(accounts[0]);
         }
     }
-    
+
     setLoginDisplay() {
         this.loginDisplay = this.authService.instance.getAllAccounts().length > 0;
-    }
-
-    getClaims(claims: any) {
-        this.dataSource = [
-            { id: 1, claim: "Display Name", value: claims ? claims['name'] : null },
-            { id: 2, claim: "User Principal Name (UPN)", value: claims ? claims['preferred_username'] : null },
-            { id: 2, claim: "OID", value: claims ? claims['oid'] : null }
-        ];
     }
 
     ngOnDestroy(): void {
