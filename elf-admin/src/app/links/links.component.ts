@@ -10,7 +10,7 @@ export class LinksComponent implements OnInit {
 
     links: Link[] = [];
 
-    displayedColumns = ['fwToken', 'originUrl', 'note', 'akaName', 'isEnabled', 'ttl', 'updateTimeUtc'];
+    displayedColumns = ['fwToken', 'originUrl', 'note', 'akaName', 'isEnabled', 'ttl', 'updateTimeUtc', 'delete'];
 
     constructor(private service: LinkService) { }
 
@@ -23,5 +23,13 @@ export class LinksComponent implements OnInit {
             .subscribe((links: Link[]) => {
                 this.links = links;
             });
+    }
+
+    checkLink(link: Link): void {
+        // TODO
+    }
+
+    deleteLink(id: number): void {
+        // TODO
     }
 }
