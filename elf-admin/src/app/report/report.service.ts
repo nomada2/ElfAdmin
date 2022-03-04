@@ -11,7 +11,7 @@ export class ReportService {
     constructor(private http: HttpClient) { }
 
     recentRequests() {
-        return this.http.get<RequestTrack>(this.url + '/requests/recent');
+        return this.http.get<RequestTrack[]>(this.url + '/requests/recent');
     }
 }
 
