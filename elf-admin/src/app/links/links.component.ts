@@ -83,7 +83,8 @@ export class LinksComponent implements OnInit {
             });
     }
 
-    checkLink(link: Link): void {
+    checkLink(id: number, isEnabled: boolean): void {
+        console.info({ id, isEnabled });
         // TODO
     }
 
