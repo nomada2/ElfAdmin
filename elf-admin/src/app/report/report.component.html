@@ -5,10 +5,8 @@
             <mat-card class="mt-4 mb-4">
                 <mat-card-title>Requests in past 7 days</mat-card-title>
                 <mat-card-content>
-                    <canvas baseChart
-                     [data]="pastWeekChartData" 
-                     [options]="pastWeekChartOptions"
-                     [type]="'line'"></canvas>
+                    <canvas baseChart [data]="pastWeekChartData" [options]="pastWeekChartOptions"
+                        [type]="'line'"></canvas>
                 </mat-card-content>
             </mat-card>
         </div>
@@ -16,7 +14,7 @@
             <mat-card class="mt-4 mb-4">
                 <mat-card-title>Client type in past 30 days</mat-card-title>
                 <mat-card-content>
-                    
+                    <canvas baseChart [data]="clientTypeChartData" [options]="clientTypeChartOptions" [type]="'doughnut'"></canvas>
                 </mat-card-content>
             </mat-card>
         </div>
@@ -24,7 +22,7 @@
             <mat-card class="mt-4 mb-4">
                 <mat-card-title>Most requested in past 30 days</mat-card-title>
                 <mat-card-content>
-                    
+
                 </mat-card-content>
             </mat-card>
         </div>

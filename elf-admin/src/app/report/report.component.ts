@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 
-import { LinkTrackingDateCount, MostRequestedLinkCount, ReportService, RequestTrack } from './report.service';
+import { ClientTypeCount, LinkTrackingDateCount, MostRequestedLinkCount, ReportService, RequestTrack } from './report.service';
 
 @Component({
     selector: 'app-report',
@@ -30,16 +30,33 @@ export class ReportComponent implements OnInit {
         }
     };
 
+    clientTypeChartData: ChartConfiguration['data'] = {
+        datasets: [],
+        labels: []
+    };
+
+    clientTypeChartOptions: ChartConfiguration['options'] = {
+        plugins: {
+            legend: {
+                display: true,
+                position: 'right'
+            }
+        }
+    };
+
     @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
-    
+    @ViewChildren(BaseChartDirective) charts?: QueryList<BaseChartDirective>;
+
     constructor(private service: ReportService) {
     }
 
     ngOnInit(): void {
         this.getRecentRequests();
         this.getTrackingCountPastWeek();
+        this.getClientTypePastMonth();
         this.getMostRequestedLinksPastMonth();
+
+
     }
 
     getMostRequestedLinksPastMonth() {
@@ -47,6 +64,33 @@ export class ReportComponent implements OnInit {
         this.service.mostRequestedLinksPastMonth().subscribe((result: MostRequestedLinkCount[]) => {
             this.isLoading = false;
             // TODO
+        })
+    }
+
+    getClientTypePastMonth() {
+        this.isLoading = true;
+        this.service.clientTypePastMonth().subscribe((result: ClientTypeCount[]) => {
+            this.isLoading = false;
+
+            const clientTypes = [];
+            const clientCounts: number[] = [];
+
+            for (let idx in result) {
+                if (result.hasOwnProperty(idx)) {
+                    clientTypes.push(result[idx].clientTypeName);
+                    clientCounts.push(result[idx].count);
+                }
+            }
+
+            this.clientTypeChartData.datasets = [{
+                data: clientCounts
+            }];
+
+            this.clientTypeChartData.labels = clientTypes;
+
+            this.charts?.forEach((child) => {
+                child.update();
+            });
         })
     }
 
@@ -70,7 +114,9 @@ export class ReportComponent implements OnInit {
 
             this.pastWeekChartData.labels = trackingDates;
 
-            this.chart?.update();
+            this.charts?.forEach((child) => {
+                child.update();
+            });
         })
     }
 
