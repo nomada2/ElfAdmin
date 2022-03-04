@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { ReportService, RequestTrack } from './report.service';
+import { MostRequestedLinkCount, ReportService, RequestTrack } from './report.service';
 
 @Component({
     selector: 'app-report',
@@ -21,6 +21,15 @@ export class ReportComponent implements OnInit {
 
     ngOnInit(): void {
         this.getRecentRequests();
+        this.getMostRequestedLinksPastMonth();
+    }
+
+    getMostRequestedLinksPastMonth() {
+        this.isLoading = true;
+        this.service.mostRequestedLinksPastMonth().subscribe((result: MostRequestedLinkCount[]) => {
+            this.isLoading = false;
+            // TODO
+        })
     }
 
     getRecentRequests() {
