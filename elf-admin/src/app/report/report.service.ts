@@ -21,6 +21,15 @@ export class ReportService {
     clientTypePastMonth() {
         return this.http.get<ClientTypeCount[]>(this.url + '/requests/clienttypepastmonth');
     }
+
+    trackingCountPastWeek() {
+        return this.http.get<LinkTrackingDateCount[]>(this.url + '/tracking/pastweek');
+    }
+}
+
+export interface LinkTrackingDateCount {
+    requestCount: number;
+    trackingDateUtc: string;
 }
 
 export interface ClientTypeCount {
