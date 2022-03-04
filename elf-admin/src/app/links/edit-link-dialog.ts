@@ -6,6 +6,7 @@ import { Link } from "./link.service";
 @Component({
     selector: 'edit-link-dialog',
     templateUrl: 'edit-link-dialog.html',
+    styleUrls: ['./edit-link-dialog.css']
 })
 export class EditLinkDialog {
     editLinkForm: FormGroup;
@@ -19,7 +20,9 @@ export class EditLinkDialog {
     buildForm() {
         this.editLinkForm = this.fb.group({
             originUrl: new FormControl(this.data?.originUrl ?? '', [Validators.required]),
-            note: new FormControl(this.data?.note ?? '')
+            note: new FormControl(this.data?.note ?? ''),
+            isEnabled: new FormControl(this.data?.isEnabled ?? true),
+            ttl: new FormControl(this.data?.ttl ?? 3600)
         })
     }
 
