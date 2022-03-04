@@ -13,6 +13,4 @@
         <button mat-flat-button *ngIf="loginDisplay" (click)="logout()">Logout</button>
     </div>
 </nav>
-<div class="container-fluid">
-    <router-outlet *ngIf="!isIframe"></router-outlet>
-</div>
+<router-outlet *ngIf="!isIframe"></router-outlet>

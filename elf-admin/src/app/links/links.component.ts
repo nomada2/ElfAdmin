@@ -12,11 +12,11 @@ import { ShareDialog } from './share-dialog';
     styleUrls: ['./links.component.css']
 })
 export class LinksComponent implements OnInit {
-
     isLoading = false;
     totalRows = 0;
     pageSize = 10;
     currentPage = 0;
+    searchTerm: string;
     pageSizeOptions: number[] = [5, 10, 15, 20, 50, 100];
 
     displayedColumns: string[] = ['fwToken', 'originUrl', 'note', 'akaName', 'isEnabled', 'ttl', 'updateTimeUtc', 'action', 'manage'];
@@ -49,6 +49,10 @@ export class LinksComponent implements OnInit {
         });
     }
 
+    search() {
+        this.getLinks(true);
+    }
+
     getLinks(reset: boolean = false): void {
         if (reset) {
             this.totalRows = 0;
@@ -57,7 +61,7 @@ export class LinksComponent implements OnInit {
 
         this.isLoading = true;
 
-        this.service.list(this.pageSize, this.currentPage * this.pageSize, '')
+        this.service.list(this.pageSize, this.currentPage * this.pageSize, this.searchTerm)
             .subscribe((result: PagedLinkResult) => {
                 this.isLoading = false;
 
