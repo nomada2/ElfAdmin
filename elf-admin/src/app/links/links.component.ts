@@ -5,6 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { EditLinkDialog } from './edit-link-dialog';
+import { ShareDialog } from './share-dialog';
 @Component({
     selector: 'app-links',
     templateUrl: './links.component.html',
@@ -32,6 +33,10 @@ export class LinksComponent implements OnInit {
 
     addNewLink() {
         this.dialog.open(EditLinkDialog);
+    }
+
+    shareLink(link: Link) {
+        this.dialog.open(ShareDialog);
     }
 
     getLinks(reset: boolean = false): void {
