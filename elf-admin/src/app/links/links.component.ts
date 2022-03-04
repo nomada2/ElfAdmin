@@ -84,8 +84,9 @@ export class LinksComponent implements OnInit {
     }
 
     checkLink(id: number, isEnabled: boolean): void {
-        console.info({ id, isEnabled });
-        // TODO
+        this.service.setEnable(id, isEnabled).subscribe(() => {
+
+        });
     }
 
     deleteLink(id: number): void {

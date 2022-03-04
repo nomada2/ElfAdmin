@@ -25,6 +25,10 @@ export class LinkService {
     delete(id: number) {
         return this.http.delete(this.url + `/${id}`);
     }
+
+    setEnable(id: number, isEnabled: boolean) {
+        return this.http.put(this.url + `/${id}/enable?isEnabled=${isEnabled}`, {});
+    }
 }
 
 export interface EditLinkRequest {
