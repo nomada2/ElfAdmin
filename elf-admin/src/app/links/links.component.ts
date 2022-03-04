@@ -36,7 +36,7 @@ export class LinksComponent implements OnInit {
     }
 
     shareLink(link: Link) {
-        this.dialog.open(ShareDialog);
+        this.dialog.open(ShareDialog, { data: link });
     }
 
     getLinks(reset: boolean = false): void {

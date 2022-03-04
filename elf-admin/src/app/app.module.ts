@@ -18,6 +18,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
+import { QRCodeModule } from 'angularx-qrcode';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
@@ -88,6 +89,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     MatDividerModule,
     MatDialogModule,
     MatChipsModule,
+    QRCodeModule,
     FormsModule,
   ],
   providers: [
