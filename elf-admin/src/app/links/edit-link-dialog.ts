@@ -1,4 +1,5 @@
 import { Component, Inject } from "@angular/core";
+import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Link } from "./link.service";
 
@@ -7,5 +8,21 @@ import { Link } from "./link.service";
     templateUrl: 'edit-link-dialog.html',
 })
 export class EditLinkDialog {
-    constructor(@Inject(MAT_DIALOG_DATA) public data: Link) { }
+    editLinkForm: FormGroup;
+
+    constructor(public fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: Link) { }
+
+    ngOnInit(): void {
+        this.buildForm();
+    }
+
+    buildForm() {
+        this.editLinkForm = this.fb.group({
+            originUrl: new FormControl('', [Validators.required])
+        })
+    }
+
+    submitForm() {
+        console.log(this.editLinkForm.value)
+    }
 }
