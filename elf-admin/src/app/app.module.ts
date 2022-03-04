@@ -19,6 +19,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { QRCodeModule } from 'angularx-qrcode';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
@@ -92,6 +93,7 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     QRCodeModule,
     FormsModule,
     ReactiveFormsModule,
+    ClipboardModule
   ],
   providers: [
     {

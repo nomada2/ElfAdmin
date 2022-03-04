@@ -28,7 +28,12 @@
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Token </th>
             <td mat-cell *matCellDef="let link">
                 <mat-chip-list #chipList>
-                    <mat-chip><a href="https://go.edi.wang/fw/{{link.fwToken}}" target="_blank">{{link.fwToken}}</a>
+                    <mat-chip (removed)="copyChip(link)">
+                        <a href="https://go.edi.wang/fw/{{link.fwToken}}" target="_blank">{{link.fwToken}}</a>
+
+                        <button matChipRemove>
+                            <mat-icon>file_copy</mat-icon>
+                        </button>
                     </mat-chip>
                 </mat-chip-list>
             </td>

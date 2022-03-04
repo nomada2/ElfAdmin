@@ -6,6 +6,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 import { EditLinkDialog } from './edit-link-dialog';
 import { ShareDialog } from './share-dialog';
+import { ClipboardService } from 'ngx-clipboard';
 @Component({
     selector: 'app-links',
     templateUrl: './links.component.html',
@@ -22,7 +23,10 @@ export class LinksComponent implements OnInit {
     displayedColumns: string[] = ['fwToken', 'originUrl', 'note', 'akaName', 'isEnabled', 'ttl', 'updateTimeUtc', 'action', 'manage'];
     dataSource: MatTableDataSource<Link> = new MatTableDataSource();
 
-    constructor(public dialog: MatDialog, private service: LinkService) { }
+    constructor(
+        public dialog: MatDialog,
+        private clipboardApi: ClipboardService,
+        private service: LinkService) { }
 
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -92,5 +96,9 @@ export class LinksComponent implements OnInit {
         this.pageSize = event.pageSize;
         this.currentPage = event.pageIndex;
         this.getLinks();
+    }
+
+    copyChip(link: Link) {
+        this.clipboardApi.copyFromContent('https://go.edi.wang/fw/' + link.fwToken);
     }
 }
