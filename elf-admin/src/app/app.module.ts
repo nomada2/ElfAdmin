@@ -37,6 +37,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditLinkDialog } from './links/edit-link-dialog';
 import { ShareDialog } from './links/share-dialog';
 import { ReportComponent } from './report/report.component';
+import { NgChartsModule } from 'ng2-charts';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication(msalConfig);
@@ -95,7 +96,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
     QRCodeModule,
     FormsModule,
     ReactiveFormsModule,
-    ClipboardModule
+    ClipboardModule,
+    NgChartsModule
   ],
   providers: [
     {
