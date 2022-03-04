@@ -2,7 +2,7 @@
 <form [formGroup]="editLinkForm" (ngSubmit)="submitForm()" novalidate>
     <mat-dialog-content class="edit-link-dialog-content d-flex flex-column">
         <mat-form-field>
-            <input matInput placeholder="Origin Url" formControlName="originUrl">
+            <input matInput type="url" placeholder="Origin Url" formControlName="originUrl">
         </mat-form-field>
         <mat-form-field>
             <input matInput placeholder="Note" formControlName="note">

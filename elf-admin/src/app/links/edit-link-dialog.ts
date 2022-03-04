@@ -1,6 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
-import { MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Link, LinkService } from "./link.service";
 
 @Component({
@@ -14,6 +14,7 @@ export class EditLinkDialog {
     constructor(
         public fb: FormBuilder,
         private service: LinkService,
+        public dialogRef: MatDialogRef<EditLinkDialog>,
         @Inject(MAT_DIALOG_DATA) public data: Link) { }
 
     ngOnInit(): void {
@@ -31,7 +32,6 @@ export class EditLinkDialog {
     }
 
     submitForm() {
-        console.log(this.editLinkForm.value)
 
         if (this.data) {
             this.service.update(this.data.id, this.editLinkForm.value).subscribe(() => {
@@ -43,5 +43,9 @@ export class EditLinkDialog {
                 console.info('added');
             });
         }
+    }
+
+    closeDialog() {
+        this.dialogRef.close();
     }
 }

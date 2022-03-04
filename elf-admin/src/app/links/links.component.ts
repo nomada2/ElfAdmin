@@ -20,7 +20,7 @@ export class LinksComponent implements OnInit {
     pageSizeOptions: number[] = [5, 10, 15, 20, 50, 100];
 
     displayedColumns: string[] = ['fwToken', 'originUrl', 'note', 'akaName', 'isEnabled', 'ttl', 'updateTimeUtc', 'action', 'manage'];
-    dataSource: MatTableDataSource<Link> = new MatTableDataSource();;
+    dataSource: MatTableDataSource<Link> = new MatTableDataSource();
 
     constructor(public dialog: MatDialog, private service: LinkService) { }
 
@@ -32,7 +32,10 @@ export class LinksComponent implements OnInit {
     }
 
     addNewLink() {
-        this.dialog.open(EditLinkDialog);
+        let diagRef = this.dialog.open(EditLinkDialog);
+        diagRef.afterClosed().subscribe(result => {
+            if (result) this.getLinks();
+        });
     }
 
     shareLink(link: Link) {
@@ -40,7 +43,10 @@ export class LinksComponent implements OnInit {
     }
 
     editLink(link: Link) {
-        this.dialog.open(EditLinkDialog, { data: link });
+        let diagRef = this.dialog.open(EditLinkDialog, { data: link });
+        diagRef.afterClosed().subscribe(result => {
+            if (result) this.getLinks();
+        });
     }
 
     getLinks(reset: boolean = false): void {
