@@ -13,6 +13,22 @@ export class LinkService {
     list(take: number, offset: number, term: string) {
         return this.http.get<PagedLinkResult>(this.url + `/list?take=${take}&offset=${offset}` + (term ? `&term=${term}` : ''))
     }
+
+    add(request: EditLinkRequest) {
+        return this.http.post(this.url + '/create', request);
+    }
+
+    delete(id: number) {
+        return this.http.delete(this.url + `/${id}`);
+    }
+}
+
+export interface EditLinkRequest {
+    originUrl: string;
+    note: string;
+    akaName: string;
+    isEnabled: boolean;
+    ttl: number;
 }
 
 export interface PagedLinkResult {

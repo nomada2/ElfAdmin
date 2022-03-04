@@ -1,7 +1,7 @@
 import { Component, Inject } from "@angular/core";
 import { FormBuilder, FormControl, FormGroup, Validators } from "@angular/forms";
 import { MAT_DIALOG_DATA } from "@angular/material/dialog";
-import { Link } from "./link.service";
+import { Link, LinkService } from "./link.service";
 
 @Component({
     selector: 'edit-link-dialog',
@@ -11,7 +11,10 @@ import { Link } from "./link.service";
 export class EditLinkDialog {
     editLinkForm: FormGroup;
 
-    constructor(public fb: FormBuilder, @Inject(MAT_DIALOG_DATA) public data: Link) { }
+    constructor(
+        public fb: FormBuilder,
+        private service: LinkService,
+        @Inject(MAT_DIALOG_DATA) public data: Link) { }
 
     ngOnInit(): void {
         this.buildForm();
@@ -21,6 +24,7 @@ export class EditLinkDialog {
         this.editLinkForm = this.fb.group({
             originUrl: new FormControl(this.data?.originUrl ?? '', [Validators.required]),
             note: new FormControl(this.data?.note ?? ''),
+            akaName: new FormControl(this.data?.akaName ?? ''),
             isEnabled: new FormControl(this.data?.isEnabled ?? true),
             ttl: new FormControl(this.data?.ttl ?? 3600)
         })
@@ -28,5 +32,14 @@ export class EditLinkDialog {
 
     submitForm() {
         console.log(this.editLinkForm.value)
+
+        if (this.data) {
+
+        }
+        else {
+            this.service.add(this.editLinkForm.value).subscribe(() => {
+                console.info('added');
+            });
+        }
     }
 }

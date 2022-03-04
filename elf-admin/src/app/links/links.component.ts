@@ -72,7 +72,9 @@ export class LinksComponent implements OnInit {
     }
 
     deleteLink(id: number): void {
-        // TODO
+        this.service.delete(id).subscribe(() => {
+            this.getLinks();
+        });
     }
 
     pageChanged(event: PageEvent) {

@@ -16,6 +16,6 @@
     </mat-dialog-content>
     <mat-dialog-actions align="end">
         <a mat-flat-button mat-dialog-close>Cancel</a>
-        <button mat-flat-button [mat-dialog-close]="true" cdkFocusInitial [disabled]="!editLinkForm.valid">Save</button>
+        <button type="submit" mat-flat-button [mat-dialog-close]="true" cdkFocusInitial [disabled]="!editLinkForm.valid">Save</button>
     </mat-dialog-actions>
 </form>
