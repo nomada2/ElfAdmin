@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { MostRequestedLinkCount, ReportService, RequestTrack } from './report.service';
+import { ChartConfiguration } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
+import { LinkTrackingDateCount, MostRequestedLinkCount, ReportService, RequestTrack } from './report.service';
 
 @Component({
     selector: 'app-report',
@@ -14,13 +16,26 @@ export class ReportComponent implements OnInit {
     displayedColumns: string[] = ['fwToken', 'note', 'userAgent', 'ipAddress', 'requestTimeUtc'];
     dataSource: MatTableDataSource<RequestTrack> = new MatTableDataSource();
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+    pastWeekChartData: ChartConfiguration['data'] = {
+        datasets: [],
+        labels: []
+    };
 
+    pastWeekChartOptions: ChartConfiguration['options'] = {
+        plugins: {
+            legend: { display: false }
+        }
+    };
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(BaseChartDirective) chart?: BaseChartDirective;
+    
     constructor(private service: ReportService) {
     }
 
     ngOnInit(): void {
         this.getRecentRequests();
+        this.getTrackingCountPastWeek();
         this.getMostRequestedLinksPastMonth();
     }
 
@@ -29,6 +44,30 @@ export class ReportComponent implements OnInit {
         this.service.mostRequestedLinksPastMonth().subscribe((result: MostRequestedLinkCount[]) => {
             this.isLoading = false;
             // TODO
+        })
+    }
+
+    getTrackingCountPastWeek() {
+        this.isLoading = true;
+        this.service.trackingCountPastWeek().subscribe((result: LinkTrackingDateCount[]) => {
+            this.isLoading = false;
+
+            const trackingDates = [];
+            const requestCounts: number[] = [];
+            for (let idx in result) {
+                if (result.hasOwnProperty(idx)) {
+                    trackingDates.push(result[idx].trackingDateUtc);
+                    requestCounts.push(result[idx].requestCount);
+                }
+            }
+
+            this.pastWeekChartData.datasets = [{
+                data: requestCounts
+            }];
+
+            this.pastWeekChartData.labels = trackingDates;
+
+            this.chart?.update();
         })
     }
 

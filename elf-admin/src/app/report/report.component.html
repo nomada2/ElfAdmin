@@ -1,11 +1,38 @@
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
 <div class="container-fluid">
-    <mat-card class="mt-4 mb-4">Simple card</mat-card>
+    <div class="row g-1">
+        <div class="col">
+            <mat-card class="mt-4 mb-4">
+                <mat-card-title>Requests in past 7 days</mat-card-title>
+                <mat-card-content>
+                    <canvas baseChart
+                     [data]="pastWeekChartData" 
+                     [options]="pastWeekChartOptions"
+                     [type]="'line'"></canvas>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col">
+
+        </div>
+        <div class="col">
+
+        </div>
+    </div>
 
     <mat-card class="mb-4">
-        <mat-card-title>Recent Requests</mat-card-title>
-        <mat-card-subtitle>Top 64 requests</mat-card-subtitle>
+        <div class="d-flex">
+            <div>
+                <mat-card-title>Recent Requests</mat-card-title>
+                <mat-card-subtitle>Top 64 requests</mat-card-subtitle>
+            </div>
+
+            <button mat-icon-button color="primary" (click)="getRecentRequests()">
+                <mat-icon class="material-icons">refresh</mat-icon>
+            </button>
+        </div>
+
         <mat-card-content>
-            <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
             <table mat-table [dataSource]="dataSource">
                 <ng-container matColumnDef="fwToken">
                     <th mat-header-cell *matHeaderCellDef> Token </th>
