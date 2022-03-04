@@ -1,4 +1,5 @@
 import { LogLevel, Configuration, BrowserCacheLocation } from '@azure/msal-browser';
+import { environment } from 'src/environments/environment';
 
 export const msalConfig: Configuration = {
     auth: {
@@ -23,11 +24,11 @@ export const msalConfig: Configuration = {
 
 export const protectedResources = {
     linkApi: {
-        endpoint: "https://go.edi.wang/api/link",
+        endpoint: environment.elfApiBaseUrl + "/api/link",
         scopes: ["api://a439e578-3ff8-4bee-91e5-96141234bc67/access_as_user"],
     },
     reportApi: {
-        endpoint: "https://go.edi.wang/api/report",
+        endpoint: environment.elfApiBaseUrl + "/api/report",
         scopes: ["api://a439e578-3ff8-4bee-91e5-96141234bc67/access_as_user"],
     }
 }

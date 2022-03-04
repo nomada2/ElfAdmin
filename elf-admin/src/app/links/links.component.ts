@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { EditLinkDialog } from './edit-link-dialog';
 import { ShareDialog } from './share-dialog';
 import { ClipboardService } from 'ngx-clipboard';
+import { environment } from 'src/environments/environment';
 @Component({
     selector: 'app-links',
     templateUrl: './links.component.html',
@@ -99,6 +100,10 @@ export class LinksComponent implements OnInit {
     }
 
     copyChip(link: Link) {
-        this.clipboardApi.copyFromContent('https://go.edi.wang/fw/' + link.fwToken);
+        this.clipboardApi.copyFromContent(environment.elfApiBaseUrl + '/fw/' + link.fwToken);
+    }
+
+    copyAka(link: Link) {
+        this.clipboardApi.copyFromContent(environment.elfApiBaseUrl + '/aka/' + link.akaName);
     }
 }

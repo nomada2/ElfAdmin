@@ -15,8 +15,8 @@
     ></qrcode>
 
     <div class="text-center">
-        <code>https://go.edi.wang/fw/{{ data.fwToken }}</code> <br />
-        <code *ngIf="data.akaName">https://go.edi.wang/aka/{{ data.akaName }}</code>
+        <code>{{ENV.elfApiBaseUrl}}/fw/{{ data.fwToken }}</code> <br />
+        <code *ngIf="data.akaName">{{ENV.elfApiBaseUrl}}/aka/{{ data.akaName }}</code>
     </div>
 </mat-dialog-content>
 <mat-dialog-actions align="end">

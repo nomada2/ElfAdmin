@@ -24,3 +24,10 @@ table {
 .z-index-999 {
   z-index: 999;
 }
+
+.copy-icon {
+  height: 20px;
+  width: 20px;
+  font-size: 20px;
+  line-height: 20px;
+}
