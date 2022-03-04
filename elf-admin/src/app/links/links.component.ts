@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
     styleUrls: ['./links.component.css']
 })
 export class LinksComponent implements OnInit {
+    ENV = environment;
     isLoading = false;
     totalRows = 0;
     pageSize = 10;

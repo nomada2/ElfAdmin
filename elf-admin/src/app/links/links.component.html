@@ -29,7 +29,7 @@
             <td mat-cell *matCellDef="let link">
                 <mat-chip-list #chipList>
                     <mat-chip (removed)="copyChip(link)">
-                        <a href="https://go.edi.wang/fw/{{link.fwToken}}" target="_blank">{{link.fwToken}}</a>
+                        <a href="{{ENV.elfApiBaseUrl}}/fw/{{link.fwToken}}" target="_blank">{{link.fwToken}}</a>
 
                         <button matChipRemove>
                             <mat-icon>file_copy</mat-icon>
@@ -56,11 +56,11 @@
             <td mat-cell *matCellDef="let link">
                 <div class="d-flex align-items-center">
                     {{link.akaName ?? '/' }}
-                    
+
                     <span class="toolbar-spacer"></span>
 
                     <button mat-icon-button color="primary" class="me-3" *ngIf="link.akaName" (click)="copyAka(link)">
-                        <mat-icon class="copy-icon">file_copy</mat-icon>    
+                        <mat-icon class="copy-icon">file_copy</mat-icon>
                     </button>
                 </div>
             </td>
