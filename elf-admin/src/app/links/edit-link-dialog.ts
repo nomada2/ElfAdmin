@@ -18,7 +18,8 @@ export class EditLinkDialog {
 
     buildForm() {
         this.editLinkForm = this.fb.group({
-            originUrl: new FormControl('', [Validators.required])
+            originUrl: new FormControl('', [Validators.required]),
+            note: new FormControl('')
         })
     }
 
