@@ -39,6 +39,10 @@ export class LinksComponent implements OnInit {
         this.dialog.open(ShareDialog, { data: link });
     }
 
+    editLink(link: Link) {
+        this.dialog.open(EditLinkDialog, { data: link });
+    }
+
     getLinks(reset: boolean = false): void {
         if (reset) {
             this.totalRows = 0;
