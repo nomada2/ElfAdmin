@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
+
 import { LinkTrackingDateCount, MostRequestedLinkCount, ReportService, RequestTrack } from './report.service';
 
 @Component({
@@ -13,6 +15,7 @@ import { LinkTrackingDateCount, MostRequestedLinkCount, ReportService, RequestTr
 export class ReportComponent implements OnInit {
     isLoading = false;
 
+    pipe = new DatePipe('en-US');
     displayedColumns: string[] = ['fwToken', 'note', 'userAgent', 'ipAddress', 'requestTimeUtc'];
     dataSource: MatTableDataSource<RequestTrack> = new MatTableDataSource();
 
@@ -56,7 +59,7 @@ export class ReportComponent implements OnInit {
             const requestCounts: number[] = [];
             for (let idx in result) {
                 if (result.hasOwnProperty(idx)) {
-                    trackingDates.push(result[idx].trackingDateUtc);
+                    trackingDates.push(this.pipe.transform(result[idx].trackingDateUtc, 'MM/dd'));
                     requestCounts.push(result[idx].requestCount);
                 }
             }
