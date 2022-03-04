@@ -3,6 +3,8 @@ import { Link, LinkService, PagedLinkResult } from './link.service';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatDialog } from '@angular/material/dialog';
+import { EditLinkDialog } from './edit-link-dialog';
 @Component({
     selector: 'app-links',
     templateUrl: './links.component.html',
@@ -19,13 +21,17 @@ export class LinksComponent implements OnInit {
     displayedColumns: string[] = ['fwToken', 'originUrl', 'note', 'akaName', 'isEnabled', 'ttl', 'updateTimeUtc', 'action', 'manage'];
     dataSource: MatTableDataSource<Link> = new MatTableDataSource();;
 
-    constructor(private service: LinkService) { }
+    constructor(public dialog: MatDialog, private service: LinkService) { }
 
     @ViewChild(MatSort) sort: MatSort;
     @ViewChild(MatPaginator) paginator!: MatPaginator;
 
     ngOnInit(): void {
         this.getLinks();
+    }
+
+    addNewLink() {
+        this.dialog.open(EditLinkDialog);
     }
 
     getLinks(reset: boolean = false): void {

@@ -32,6 +32,7 @@ import { HomeComponent } from './home/home.component';
 import { LinkService } from './links/link.service';
 import { LinksComponent } from './links/links.component';
 import { FormsModule } from '@angular/forms';
+import { EditLinkDialog } from './links/edit-link-dialog';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication(msalConfig);
@@ -62,7 +63,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
   declarations: [
     AppComponent,
     HomeComponent,
-    LinksComponent
+    LinksComponent,
+    EditLinkDialog
   ],
   imports: [
     BrowserModule,
