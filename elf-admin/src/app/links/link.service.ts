@@ -18,6 +18,10 @@ export class LinkService {
         return this.http.post(this.url + '/create', request);
     }
 
+    update(id: number, request: EditLinkRequest) {
+        return this.http.put(this.url + `/${id}`, request);
+    }
+
     delete(id: number) {
         return this.http.delete(this.url + `/${id}`);
     }

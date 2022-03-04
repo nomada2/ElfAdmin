@@ -34,7 +34,9 @@ export class EditLinkDialog {
         console.log(this.editLinkForm.value)
 
         if (this.data) {
-
+            this.service.update(this.data.id, this.editLinkForm.value).subscribe(() => {
+                console.info('updated');
+            });
         }
         else {
             this.service.add(this.editLinkForm.value).subscribe(() => {
