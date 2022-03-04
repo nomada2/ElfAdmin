@@ -22,7 +22,7 @@
             <mat-card class="mt-4 mb-4">
                 <mat-card-title>Most requested in past 30 days</mat-card-title>
                 <mat-card-content>
-
+                    <canvas baseChart [data]="mostRequestedChartData" [options]="mostRequestedChartOptions" [type]="'pie'"></canvas>
                 </mat-card-content>
             </mat-card>
         </div>

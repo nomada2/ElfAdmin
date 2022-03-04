@@ -44,6 +44,20 @@ export class ReportComponent implements OnInit {
         }
     };
 
+    mostRequestedChartData: ChartConfiguration['data'] = {
+        datasets: [],
+        labels: []
+    };
+
+    mostRequestedChartOptions: ChartConfiguration['options'] = {
+        plugins: {
+            legend: {
+                display: true,
+                position: 'right'
+            }
+        }
+    };
+
     @ViewChild(MatPaginator) paginator: MatPaginator;
     @ViewChildren(BaseChartDirective) charts?: QueryList<BaseChartDirective>;
 
@@ -55,8 +69,6 @@ export class ReportComponent implements OnInit {
         this.getTrackingCountPastWeek();
         this.getClientTypePastMonth();
         this.getMostRequestedLinksPastMonth();
-
-
     }
 
     getMostRequestedLinksPastMonth() {
@@ -64,6 +76,26 @@ export class ReportComponent implements OnInit {
         this.service.mostRequestedLinksPastMonth().subscribe((result: MostRequestedLinkCount[]) => {
             this.isLoading = false;
             // TODO
+
+            const notes = [];
+            const requestCounts: number[] = [];
+
+            for (let idx in result) {
+                if (result.hasOwnProperty(idx)) {
+                    notes.push(result[idx].note);
+                    requestCounts.push(result[idx].requestCount);
+                }
+            }
+
+            this.mostRequestedChartData.datasets = [{
+                data: requestCounts
+            }];
+
+            this.mostRequestedChartData.labels = notes;
+
+            this.charts?.forEach((child) => {
+                child.update();
+            });
         })
     }
 
