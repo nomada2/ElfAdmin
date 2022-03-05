@@ -3,6 +3,7 @@ import { MsalBroadcastService, MsalGuardConfiguration, MsalService, MSAL_GUARD_C
 import { AccountInfo, AuthenticationResult, InteractionStatus, InteractionType, PopupRequest, RedirectRequest } from '@azure/msal-browser';
 import { Subject } from 'rxjs';
 import { filter, takeUntil } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,7 @@ import { filter, takeUntil } from 'rxjs/operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
+  ENV = environment;
   title = 'elf-admin';
   isIframe = false;
   loginDisplay = false;

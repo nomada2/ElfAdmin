@@ -36,3 +36,8 @@ a.title {
 .user-info {
   font-size: 14px;
 }
+
+.api-info {
+  font-size: 14px;
+  color: #F2F2F2;
+}
