@@ -33,6 +33,10 @@ a.title {
   color: #FFF;
 }
 
+.elf-navbar .elf-navbar-header a.active {
+  background: rgba(0, 0, 0, .2);
+}
+
 .user-info {
   font-size: 14px;
 }

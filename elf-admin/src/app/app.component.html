@@ -1,9 +1,9 @@
 <nav class="elf-navbar mat-elevation-z6">
     <div class="elf-navbar-header">
-        <a mat-button [routerLink]="['/']">Elf Admin</a>
+        <a mat-button [routerLink]="['/']" (click)="setMenu('home')">Elf Admin</a>
 
-        <a mat-button [routerLink]="['links']">Manage Links</a>
-        <a mat-button [routerLink]="['report']">Report</a>
+        <a mat-button [routerLink]="['links']" [ngClass]="{'active': currentMenu == 'links'}" (click)="setMenu('links')">Manage Links</a>
+        <a mat-button [routerLink]="['report']" [ngClass]="{'active': currentMenu == 'report'}" (click)="setMenu('report')">Report</a>
 
         <div class="flex-spacer"></div>
 
