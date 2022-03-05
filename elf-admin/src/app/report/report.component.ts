@@ -65,17 +65,26 @@ export class ReportComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.getData();
+    }
+
+    getData() {
         this.getRecentRequests();
         this.getTrackingCountPastWeek();
         this.getClientTypePastMonth();
         this.getMostRequestedLinksPastMonth();
     }
 
+    clearTrackingData() {
+        this.service.clearTrackingData().subscribe(() => {
+            this.getData();
+        });
+    }
+
     getMostRequestedLinksPastMonth() {
         this.isLoading = true;
         this.service.mostRequestedLinksPastMonth().subscribe((result: MostRequestedLinkCount[]) => {
             this.isLoading = false;
-            // TODO
 
             const notes = [];
             const requestCounts: number[] = [];

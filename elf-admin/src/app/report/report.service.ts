@@ -25,6 +25,10 @@ export class ReportService {
     trackingCountPastWeek() {
         return this.http.get<LinkTrackingDateCount[]>(this.url + '/tracking/pastweek');
     }
+
+    clearTrackingData() {
+        return this.http.delete(this.url + '/tracking/clear');
+    }
 }
 
 export interface LinkTrackingDateCount {
