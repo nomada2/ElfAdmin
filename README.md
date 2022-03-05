@@ -7,6 +7,9 @@ Admin portal for [Elf](https://github.com/EdiWang/Elf), the .NET 6 link forward 
 - Manage Links
 - View Reports
 
+![image](https://user-images.githubusercontent.com/3304703/156873651-845c72fe-84e7-4536-bfe4-6785accae5ce.png)
+![image](https://user-images.githubusercontent.com/3304703/156873643-38f9d582-777e-4cb1-b053-6656fb5bd36e.png)
+
 ## Build and Run
 
 ### Pre-requests
